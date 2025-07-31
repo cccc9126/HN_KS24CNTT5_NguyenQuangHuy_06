@@ -142,7 +142,7 @@ int main() {
                 newBook[strcspn(newBook, "\n")] = '\0';
                 push(bookStack, newBook);
 
-                printStack(bookStack);
+
                 break;
 
             case 2:

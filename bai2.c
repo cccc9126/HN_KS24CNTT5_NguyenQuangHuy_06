@@ -14,7 +14,7 @@ typedef struct Node {
 Node* create(const char* data) {
     Node *newNode = (Node *) malloc(sizeof(Node));
     if (newNode == NULL) {
-        printf("Memory allocation failed!\n");
+        printf("Không đủ bộ nhớ\n");
         return NULL;
     }
     strncpy(newNode->content, data, MAX_LEN - 1);
@@ -94,8 +94,19 @@ void freeTree(Node *root) {
 }
 Node* deleteNode(Node *root, const char* data) {
     if (root == NULL) return NULL;
-    if (strcmp(root->content, data) == 0) {
-        Node *temp = root->yesChild;
+    printf("%s", root->content);
+    printf("Xóa nút này (yes/no) :");
+    char answer[10];
+    fgets(answer, sizeof(answer), stdin);
+    answer[strcspn(answer, "\n")] = 0;
+    if (strcmp(answer, "yes") == 0) {
+        if (root->yesChild == NULL && root->noChild == NULL) {
+            free(root);
+            return NULL;
+        } else if (root->yesChild == NULL) {
+            Node *temp = root->noChild;
+            free(root);
+        }
     }
 }
 int main() {
@@ -138,6 +149,9 @@ int main() {
                 printf("Thêm thành công!\n");
                 break;
             case 4:
+
+                deleteNode(root, input);
+                break;
 
             case 5:
                 freeTree(root);

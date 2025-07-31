@@ -106,7 +106,23 @@ Node* deleteNode(Node *root, const char* data) {
         } else if (root->yesChild == NULL) {
             Node *temp = root->noChild;
             free(root);
+        }else if (root->noChild == NULL) {
+            Node *temp = root->yesChild;
+            free(root);
         }
+        else {
+            Node *temp = root->yesChild;
+            while (temp->noChild != NULL) {
+                temp = temp->noChild;
+            }
+            temp->noChild = root->noChild;
+            free(root);
+        }
+
+
+    }else if (strcmp(answer, "no") == 0) {
+        deleteNode(root->yesChild, data);
+        deleteNode(root->noChild, data);
     }
 }
 int main() {
@@ -150,7 +166,7 @@ int main() {
                 break;
             case 4:
 
-                deleteNode(root, input);
+                root=deleteNode(root, input);
                 break;
 
             case 5:

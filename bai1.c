@@ -114,13 +114,13 @@ void freeStack(Stack *s) {
 
 
 int main() {
+
     Stack *bookStack = (Stack *) malloc(sizeof(Stack));
     Queue *closedBook = (Queue *) malloc(sizeof(Queue));
     initStack(bookStack);
     initQueue(closedBook);
     int choice;
     char current[MAX_LEN];
-
     do {
         printf("==========E-BOOK READER MANAGER==========\n");
         printf("1. Mở sách mới\n");
